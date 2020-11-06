@@ -32,11 +32,25 @@ def getClassPredictions(x_test, y_train, means, stand_devs, class_probs):
         y_prediction.append(pandas.Series(probs).values.argmax())
     return y_prediction
 
+def printResults(y_test, means, stand_devs, class_probs, class_predictions):
+    print("Mean value for each class:\n##################################################################################")
+    print(means)
+    print()
+    print("Standard deviations for each class:\n##################################################################################")
+    print(stand_devs)
+    print()
+    print("Class probabilities:\n##################################################################################")
+    print(class_probs)
+    print()
+    score = accuracy_score(y_test, class_predictions) * 100
+    score = round(score, 2)
+    print("Accuracy using predictions against test data:\n##################################################################################")
+    print("Accuracy = " + str(score) + "%")
+
 def main():
     x_train, x_test, y_train, y_test = setupData()
     means, stand_devs, class_probs = getStats(x_train, x_test, y_train, y_test)
     class_predictions = getClassPredictions(x_test, y_train, means, stand_devs, class_probs)
-    score = accuracy_score(y_test, class_predictions)
-    print(score)
+    printResults(y_test, means, stand_devs, class_probs, class_predictions)
 
 main()
