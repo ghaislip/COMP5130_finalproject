@@ -1,11 +1,13 @@
-from sklearn.datasets import load_iris
+from sklearn.datasets import load_wine
+from sklearn.naive_bayes import GaussianNB
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score
 from scipy.stats import norm
+import matplotlib.pyplot as plt
 import pandas
 import numpy
 
-dataset = load_iris()
+dataset = load_wine()
 
 def setupData():
     x = dataset['data']
@@ -47,10 +49,31 @@ def printResults(y_test, means, stand_devs, class_probs, class_predictions):
     print("Accuracy using predictions against test data:\n##################################################################################")
     print("Accuracy = " + str(score) + "%")
 
+def testModel(x_train, y_train, x_test, y_test):
+    model = GaussianNB()
+    model.fit(x_train, y_train)
+    y_prediction = model.predict(x_test)
+    score = accuracy_score(y_test, y_prediction) * 100
+    score = round(score, 2)
+    print("Accuracy using sklearn model: " + str(score) + "%")
+    return y_prediction
+
+def graphResults(x_test, class_predictions, sklearn_predictions):
+    plt.scatter(x_test, sklearn_predictions)
+    plt.title('Predictions with Alcohol Content')
+    plt.xlabel("Alcohol Percentage")
+    plt.ylabel("Cultivars")
+    plt.savefig('predictions_sklearn.png')
+
+    plt.scatter(x_test, class_predictions)
+    plt.savefig('predictions.png')
+
 def main():
     x_train, x_test, y_train, y_test = setupData()
     means, stand_devs, class_probs = getStats(x_train, x_test, y_train, y_test)
     class_predictions = getClassPredictions(x_test, y_train, means, stand_devs, class_probs)
     printResults(y_test, means, stand_devs, class_probs, class_predictions)
+    sklearn_predictions = testModel(x_train, y_train, x_test, y_test)
+    graphResults(x_test['alcohol'], class_predictions, sklearn_predictions)
 
 main()
