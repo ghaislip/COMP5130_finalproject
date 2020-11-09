@@ -3,6 +3,7 @@ from sklearn.naive_bayes import GaussianNB
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score
 from sklearn.metrics import precision_score
+from sklearn.metrics import jaccard_score
 from scipy.stats import norm
 import matplotlib.pyplot as plt
 import pandas
@@ -53,19 +54,28 @@ def testModel(x_train, y_train, x_test, y_test, class_predictions):
     y_prediction = model.predict(x_test)
     score = accuracy_score(y_test, class_predictions) * 100
     score = round(score, 2)
-    print("Precision using predictions against test data:\n##################################################################################")
-    print("Accuracy = " + str(score) + "%")
+    print()
+    print("Accuracy score using predictions against test data:\n##################################################################################")
+    print("Accuracy score: " + str(score) + "%")
     score = accuracy_score(y_test, y_prediction) * 100
     score = round(score, 2)
-    print("Accuracy using sklearn model: " + str(score) + "%")
+    print("Accuracy score using sklearn model: " + str(score) + "%")
     score = precision_score(y_test, class_predictions, average='micro') * 100
     score = round(score, 2)
+    print()
     print("Precision score using predictions against test data:\n##################################################################################")
     print ("Precision Score: " + str(score) + "%")
     score = precision_score(y_test, y_prediction, average='micro') * 100
     score = round(score, 2)
     print ("Precision Score with sklearn model: " + str(score) + "%")
-
+    print()
+    print("Jaccard score using predictions against test data:\n##################################################################################")
+    score = jaccard_score(y_test, class_predictions, average='micro')
+    score = round(score, 2)
+    print ("Jaccard Score: " + str(score) + "%")
+    score = jaccard_score(y_test, y_prediction, average='micro')
+    score = round(score, 2)
+    print ("Jaccard Score using sklearn: " + str(score) + "%")
     return y_prediction
 
 def graphResults(x_test, class_predictions, sklearn_predictions):
@@ -85,7 +95,7 @@ def main():
     class_predictions = getClassPredictions(x_test, y_train, means, stand_devs, class_probs)
     end = datetime.datetime.now()
     runtime = (end - start).total_seconds()
-    print("Runtime: " + str(runtime) + " seconds")
+    print("Algorithm Runtime: " + str(runtime) + " seconds\n")
     printResults(means, stand_devs, class_probs)
     sklearn_predictions = testModel(x_train, y_train, x_test, y_test, class_predictions)
     graphResults(x_test['alcohol'], class_predictions, sklearn_predictions)
