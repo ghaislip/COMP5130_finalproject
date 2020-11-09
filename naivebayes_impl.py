@@ -7,6 +7,7 @@ from scipy.stats import norm
 import matplotlib.pyplot as plt
 import pandas
 import numpy
+import datetime
 
 dataset = load_wine()
 
@@ -78,9 +79,13 @@ def graphResults(x_test, class_predictions, sklearn_predictions):
     plt.savefig('predictions.png')
 
 def main():
+    start = datetime.datetime.now()
     x_train, x_test, y_train, y_test = setupData()
     means, stand_devs, class_probs = getStats(x_train, y_train)
     class_predictions = getClassPredictions(x_test, y_train, means, stand_devs, class_probs)
+    end = datetime.datetime.now()
+    runtime = (end - start).total_seconds()
+    print("Runtime: " + str(runtime) + " seconds")
     printResults(means, stand_devs, class_probs)
     sklearn_predictions = testModel(x_train, y_train, x_test, y_test, class_predictions)
     graphResults(x_test['alcohol'], class_predictions, sklearn_predictions)
