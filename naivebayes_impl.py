@@ -84,10 +84,10 @@ def graphResults(x_test, class_predictions, sklearn_predictions):
     plt.title('Predictions of Breast Tumors as Cancerous with Tumor Radius')
     plt.xlabel("Tumor Radius")
     plt.ylabel("Melignant (0) or Benign (1)")
-    plt.savefig('predictions_sklearn.png')
+    plt.savefig('graphs/predictions_sklearn.png')
 
     plt.scatter(x_test, class_predictions)
-    plt.savefig('predictions_impl.png')
+    plt.savefig('graphs/predictions_impl.png')
 
 def graphConfusionMatrix(X_test, y_test, class_predictions):
     numpy.set_printoptions(precision=2)
@@ -97,7 +97,7 @@ def graphConfusionMatrix(X_test, y_test, class_predictions):
 
     disp = disp.plot(cmap=plt.cm.Blues)
     plt.title("Confusion Matrix")
-    plt.savefig('predictions_confusion_matrix.png')
+    plt.savefig('graphs/predictions_confusion_matrix.png')
 
 def main():
     start = datetime.datetime.now()
