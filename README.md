@@ -23,3 +23,4 @@
         <li>Classes: Benign (not cancerous) and Malignant (cancerous)</li>
         <li>Attributes: 30</li>
     </ul>
+    <p>More  info can be found here: https://archive.ics.uci.edu/ml/datasets/Breast+Cancer+Wisconsin+(Diagnostic)</p>
