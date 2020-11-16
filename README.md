@@ -1,6 +1,9 @@
 <h3>Environment:</h3>
-    <p>Ubuntu 18.04</p>
-    <p>Python 3.6.9</p>
+    <ul>
+        <li>Ubuntu 18.04</li>
+        <li>Python 3.6.9</li>
+    </ul>
+    
 
 <h3>Required Packages:</h3>
     <p>matplotlib</p>
