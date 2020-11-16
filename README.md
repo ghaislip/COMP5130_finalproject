@@ -1,13 +1,13 @@
-Environment:
-    Ubuntu 18.04
-    Python 3.6.9
+<h3>Environment:</h3>
+    <p>Ubuntu 18.04</p>
+    <p>Python 3.6.9</p>
 
-Required Packages:
-    matplotlib
-    numpy
-    pandas
-    sklearn
-    scipy
+<h3>Required Packages:</h3>
+    <p>matplotlib</p>
+    <p>numpy</p>
+    <p>pandas</p>
+    <p>sklearn</p>
+    <p>scipy</p>
 
-Run command:
-    python3 naivebayes_impl.py
+<h3>Run command:</h3>
+    <p>python3 naivebayes_impl.py</p>
