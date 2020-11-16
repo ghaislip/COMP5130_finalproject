@@ -6,11 +6,12 @@
     
 
 <h3>Required Packages:</h3>
-    <p>matplotlib</p>
-    <p>numpy</p>
-    <p>pandas</p>
-    <p>sklearn</p>
-    <p>scipy</p>
+    <ul>
+        <li>matplotlib</li>
+        <li>numpy</li>
+        <li>pandas</li>
+        <li>sklearn</li>
+        <li>scipy</lip>
+    </ul>
 
-<h3>Run command:</h3>
-    <p>python3 naivebayes_impl.py</p>
+<h3>Run command: python3 naivebayes_impl.py</h3>
