@@ -1,4 +1,4 @@
-from sklearn.datasets import load_wine
+from sklearn.datasets import load_diabetes
 from sklearn.naive_bayes import GaussianNB
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score
@@ -10,7 +10,7 @@ import pandas
 import numpy
 import datetime
 
-dataset = load_wine()
+dataset = load_diabetes()
 
 def setupData():
     x = dataset['data']
@@ -69,11 +69,11 @@ def testModel(x_train, y_train, x_test, y_test, class_predictions):
     score = round(score, 2)
     print ("Precision Score with sklearn model: " + str(score) + "%")
     print()
-    print("Jaccard score using predictions against test data:\n##################################################################################")
-    score = jaccard_score(y_test, class_predictions, average='micro')
+    print("Jaccard score using predictions against test data:\n################ ##################################################################")
+    score = jaccard_score(y_test, class_predictions, average='micro') * 100
     score = round(score, 2)
     print ("Jaccard Score: " + str(score) + "%")
-    score = jaccard_score(y_test, y_prediction, average='micro')
+    score = jaccard_score(y_test, y_prediction, average='micro') * 100
     score = round(score, 2)
     print ("Jaccard Score using sklearn: " + str(score) + "%")
     return y_prediction
@@ -98,6 +98,6 @@ def main():
     print("Algorithm Runtime: " + str(runtime) + " seconds\n")
     printResults(means, stand_devs, class_probs)
     sklearn_predictions = testModel(x_train, y_train, x_test, y_test, class_predictions)
-    graphResults(x_test['alcohol'], class_predictions, sklearn_predictions)
+    graphResults(x_test['mean radius'], class_predictions, sklearn_predictions)
 
 main()
