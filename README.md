@@ -1,4 +1,5 @@
-<h3>Run command: python3 naivebayes_impl.py</h3>
+<h3>Run command:</h3>
+    <p>python3 naivebayes_impl.py</p>
 <h3>Environment:</h3>
     <ul>
         <li>Ubuntu 18.04</li>
