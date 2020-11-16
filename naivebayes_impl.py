@@ -1,16 +1,17 @@
-from sklearn.datasets import load_diabetes
+from sklearn.datasets import load_breast_cancer
 from sklearn.naive_bayes import GaussianNB
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score
 from sklearn.metrics import precision_score
 from sklearn.metrics import jaccard_score
+from sklearn.metrics import plot_confusion_matrix, ConfusionMatrixDisplay, confusion_matrix
 from scipy.stats import norm
 import matplotlib.pyplot as plt
 import pandas
 import numpy
 import datetime
 
-dataset = load_diabetes()
+dataset = load_breast_cancer()
 
 def setupData():
     x = dataset['data']
@@ -80,13 +81,23 @@ def testModel(x_train, y_train, x_test, y_test, class_predictions):
 
 def graphResults(x_test, class_predictions, sklearn_predictions):
     plt.scatter(x_test, sklearn_predictions)
-    plt.title('Predictions with Alcohol Content')
-    plt.xlabel("Alcohol Percentage")
-    plt.ylabel("Cultivars")
+    plt.title('Predictions of Breast Tumors as Cancerous with Tumor Radius')
+    plt.xlabel("Tumor Radius")
+    plt.ylabel("Melignant (0) or Benign (1)")
     plt.savefig('predictions_sklearn.png')
 
     plt.scatter(x_test, class_predictions)
-    plt.savefig('predictions.png')
+    plt.savefig('predictions_impl.png')
+
+def graphConfusionMatrix(X_test, y_test, class_predictions):
+    numpy.set_printoptions(precision=2)
+    cm = confusion_matrix(y_test, class_predictions)
+    disp = ConfusionMatrixDisplay(confusion_matrix=cm,
+                                  display_labels=dataset.target_names)
+
+    disp = disp.plot(cmap=plt.cm.Blues)
+    plt.title("Confusion Matrix")
+    plt.savefig('predictions_confusion_matrix.png')
 
 def main():
     start = datetime.datetime.now()
@@ -99,5 +110,6 @@ def main():
     printResults(means, stand_devs, class_probs)
     sklearn_predictions = testModel(x_train, y_train, x_test, y_test, class_predictions)
     graphResults(x_test['mean radius'], class_predictions, sklearn_predictions)
+    graphConfusionMatrix(x_test, y_test, class_predictions)
 
 main()
