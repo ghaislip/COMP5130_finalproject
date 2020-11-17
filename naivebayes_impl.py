@@ -70,7 +70,7 @@ def testModel(x_train, y_train, x_test, y_test, class_predictions):
     score = round(score, 2)
     print ("Precision Score with sklearn model: " + str(score) + "%")
     print()
-    print("Jaccard score using predictions against test data:\n################ ##################################################################")
+    print("Jaccard score using predictions against test data:\n##################################################################################")
     score = jaccard_score(y_test, class_predictions, average='micro') * 100
     score = round(score, 2)
     print ("Jaccard Score: " + str(score) + "%")
